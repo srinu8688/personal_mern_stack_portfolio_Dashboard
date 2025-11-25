@@ -123,7 +123,13 @@ const Dashboard = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardFooter>
-                  <Button>Visit Portfolio</Button>
+                  <Button> <a
+                    href="https://personal-mern-stack-portfolio-ui.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit Portfolio
+                  </a></Button>
                 </CardFooter>
               </Card>
               <Card className="flex flex-col justify-center">
@@ -203,12 +209,12 @@ const Dashboard = () => {
                                     to={element.projectLink}
                                     target="_blank"
                                     onClick={(e) => {
-      // If the link doesn't start with http/https, add it
-      if (!element.projectLink.startsWith('http')) {
-        e.preventDefault();
-        window.open(`https://${element.projectLink}`, '_blank');
-      }
-    }}
+                                      // If the link doesn't start with http/https, add it
+                                      if (!element.projectLink.startsWith('http')) {
+                                        e.preventDefault();
+                                        window.open(`https://${element.projectLink}`, '_blank');
+                                      }
+                                    }}
                                   >
                                     <Button >Visit</Button>
                                   </Link>
@@ -273,7 +279,7 @@ const Dashboard = () => {
                       </TableHeader>
                       <TableBody>
                         {softwareApplications &&
-                        softwareApplications.length > 0 ? (
+                          softwareApplications.length > 0 ? (
                           softwareApplications.map((element) => {
                             return (
                               <TableRow className="bg-accent" key={element._id}>
