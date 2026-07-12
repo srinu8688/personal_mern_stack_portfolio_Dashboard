@@ -50,21 +50,25 @@ export const forgotPassword = (email) => async (dispatch) => {
   try {
     dispatch(forgotResetPassSlice.actions.forgotPasswordRequest());
     console.log(email);
+
     const response = await axios.post(
-      "https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/user/password/forgot",
+      `${import.meta.env.VITE_API_URL}/api/v1/user/password/forgot`,
       { email },
-      { withCredentials: true, headers: { "Content-Type": "application/json" } }
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      },
     );
     console.log(response);
     dispatch(
-      forgotResetPassSlice.actions.forgotPasswordSuccess(response.data.message)
+      forgotResetPassSlice.actions.forgotPasswordSuccess(response.data.message),
     );
   } catch (error) {
     console.log(error);
     dispatch(
       forgotResetPassSlice.actions.forgotPasswordFailed(
-        error.response.data.message
-      )
+        error.response.data.message,
+      ),
     );
   }
 };
@@ -74,23 +78,25 @@ export const resetPassword =
     try {
       dispatch(forgotResetPassSlice.actions.resetPasswordRequest());
       const response = await axios.put(
-        `https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/user/password/reset/${token}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/user/password/reset/${token}`,
         { password, confirmPassword },
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
-        }
+        },
       );
       console.log(response);
       dispatch(
-        forgotResetPassSlice.actions.resetPasswordSuccess(response.data.message)
+        forgotResetPassSlice.actions.resetPasswordSuccess(
+          response.data.message,
+        ),
       );
     } catch (error) {
       console.log(error);
       dispatch(
         forgotResetPassSlice.actions.resetPasswordFailed(
-          error.response.data.message
-        )
+          error.response.data.message,
+        ),
       );
     }
   };

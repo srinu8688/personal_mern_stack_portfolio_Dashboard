@@ -72,16 +72,15 @@ export const getAllTimeline = () => async (dispatch) => {
   dispatch(timelineSlice.actions.getAllTimelineRequest());
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/timeline/getall",
-      { withCredentials: true }
+      `${import.meta.env.VITE_API_URL}/api/v1/timeline/getall`,
     );
     dispatch(
-      timelineSlice.actions.getAllTimelineSuccess(response.data.timelines)
+      timelineSlice.actions.getAllTimelineSuccess(response.data.timelines),
     );
     dispatch(timelineSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      timelineSlice.actions.getAllTimelineFailed(error.response.data.message)
+      timelineSlice.actions.getAllTimelineFailed(error.response.data.message),
     );
   }
 };
@@ -90,20 +89,20 @@ export const addNewTimeline = (data) => async (dispatch) => {
   dispatch(timelineSlice.actions.addNewTimelineRequest());
   try {
     const response = await axios.post(
-      "https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/timeline/add",
+      `${import.meta.env.VITE_API_URL}/api/v1/timeline/add`,
       data,
       {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
     dispatch(
-      timelineSlice.actions.addNewTimelineSuccess(response.data.message)
+      timelineSlice.actions.addNewTimelineSuccess(response.data.message),
     );
     dispatch(timelineSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      timelineSlice.actions.addNewTimelineFailed(error.response.data.message)
+      timelineSlice.actions.addNewTimelineFailed(error.response.data.message),
     );
   }
 };
@@ -111,18 +110,18 @@ export const deleteTimeline = (id) => async (dispatch) => {
   dispatch(timelineSlice.actions.deleteTimelineRequest());
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/timeline/delete/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/v1/timeline/delete/${id}`,
       {
         withCredentials: true,
-      }
+      },
     );
     dispatch(
-      timelineSlice.actions.deleteTimelineSuccess(response.data.message)
+      timelineSlice.actions.deleteTimelineSuccess(response.data.message),
     );
     dispatch(timelineSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      timelineSlice.actions.deleteTimelineFailed(error.response.data.message)
+      timelineSlice.actions.deleteTimelineFailed(error.response.data.message),
     );
   }
 };

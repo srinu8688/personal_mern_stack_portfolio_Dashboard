@@ -87,14 +87,13 @@ export const getAllSkills = () => async (dispatch) => {
   dispatch(skillSlice.actions.getAllSkillsRequest());
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/skill/getall",
-      { withCredentials: true }
+      `${import.meta.env.VITE_API_URL}/api/v1/skill/getall`,
     );
     dispatch(skillSlice.actions.getAllSkillsSuccess(response.data.skills));
     dispatch(skillSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      skillSlice.actions.getAllSkillsFailed(error.response.data.message)
+      skillSlice.actions.getAllSkillsFailed(error.response.data.message),
     );
   }
 };
@@ -103,12 +102,12 @@ export const addNewSkill = (data) => async (dispatch) => {
   dispatch(skillSlice.actions.addNewSkillRequest());
   try {
     const response = await axios.post(
-      "https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/skill/add",
+      `${import.meta.env.VITE_API_URL}/api/v1/skill/add`,
       data,
       {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
-      }
+      },
     );
     console.log(response);
     console.log(response.data.message);
@@ -123,12 +122,12 @@ export const updateSkill = (id, proficiency) => async (dispatch) => {
   dispatch(skillSlice.actions.updateSkillRequest());
   try {
     const response = await axios.put(
-      `https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/skill/update/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/v1/skill/update/${id}`,
       { proficiency },
       {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
     dispatch(skillSlice.actions.updateSkillSuccess(response.data.message));
     dispatch(skillSlice.actions.clearAllErrors());
@@ -141,10 +140,10 @@ export const deleteSkill = (id) => async (dispatch) => {
   dispatch(skillSlice.actions.deleteSkillRequest());
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/skill/delete/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/v1/skill/delete/${id}`,
       {
         withCredentials: true,
-      }
+      },
     );
     dispatch(skillSlice.actions.deleteSkillSuccess(response.data.message));
     dispatch(skillSlice.actions.clearAllErrors());

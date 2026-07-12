@@ -70,78 +70,77 @@ const softwareApplicationSlice = createSlice({
 
 export const getAllSoftwareApplications = () => async (dispatch) => {
   dispatch(
-    softwareApplicationSlice.actions.getAllsoftwareApplicationsRequest()
+    softwareApplicationSlice.actions.getAllsoftwareApplicationsRequest(),
   );
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/softwareapplication/getall",
-      { withCredentials: true }
+      `${import.meta.env.VITE_API_URL}/api/v1/softwareapplication/getall`,
     );
     dispatch(
       softwareApplicationSlice.actions.getAllsoftwareApplicationsSuccess(
-        response.data.softwareApplications
-      )
+        response.data.softwareApplications,
+      ),
     );
     dispatch(softwareApplicationSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
       softwareApplicationSlice.actions.getAllsoftwareApplicationsFailed(
-        error.response.data.message
-      )
+        error.response.data.message,
+      ),
     );
   }
 };
 
 export const addNewSoftwareApplication = (data) => async (dispatch) => {
   dispatch(
-    softwareApplicationSlice.actions.addNewsoftwareApplicationsRequest()
+    softwareApplicationSlice.actions.addNewsoftwareApplicationsRequest(),
   );
   try {
     const response = await axios.post(
-      "https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/softwareapplication/add",
+      `${import.meta.env.VITE_API_URL}/api/v1/softwareapplication/add`,
       data,
       {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
-      }
+      },
     );
     dispatch(
       softwareApplicationSlice.actions.addNewsoftwareApplicationsSuccess(
-        response.data.message
-      )
+        response.data.message,
+      ),
     );
     dispatch(softwareApplicationSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
       softwareApplicationSlice.actions.addNewsoftwareApplicationsFailed(
-        error.response.data.message
-      )
+        error.response.data.message,
+      ),
     );
   }
 };
 
 export const deleteSoftwareApplication = (id) => async (dispatch) => {
   dispatch(
-    softwareApplicationSlice.actions.deletesoftwareApplicationsRequest()
+    softwareApplicationSlice.actions.deletesoftwareApplicationsRequest(),
   );
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/softwareapplication/delete/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/v1/softwareapplication/delete/${id}`,
       {
         withCredentials: true,
-      }
+      },
     );
     dispatch(
       softwareApplicationSlice.actions.deletesoftwareApplicationsSuccess(
-        response.data.message
-      )
+        response.data.message,
+      ),
     );
     dispatch(softwareApplicationSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
       softwareApplicationSlice.actions.deletesoftwareApplicationsFailed(
-        error.response.data.message
-      )
+        error.response.data.message,
+      ),
     );
   }
 };

@@ -124,7 +124,7 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardFooter>
                   <Button> <a
-                    href="https://personal-mern-stack-portfolio-ui.vercel.app/"
+                    href={import.meta.env.VITE_PORTFOLIO_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

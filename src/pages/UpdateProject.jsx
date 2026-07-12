@@ -49,7 +49,7 @@ const UpdateProject = () => {
   useEffect(() => {
     const getProject = async () => {
       await axios
-        .get(`https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/project/get/${id}`, {
+        .get(`${import.meta.env.VITE_API_URL}/api/v1/project/get/${id}`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -61,10 +61,12 @@ const UpdateProject = () => {
           setGitRepoLink(res.data.project.gitRepoLink);
           setProjectLink(res.data.project.projectLink);
           setProjectBanner(
-            res.data.project.projectBanner && res.data.project.projectBanner.url
+            res.data.project.projectBanner &&
+              res.data.project.projectBanner.url,
           );
           setProjectBannerPreview(
-            res.data.project.projectBanner && res.data.project.projectBanner.url
+            res.data.project.projectBanner &&
+              res.data.project.projectBanner.url,
           );
         })
         .catch((error) => {

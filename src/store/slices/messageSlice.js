@@ -57,16 +57,16 @@ export const getAllMessages = () => async (dispatch) => {
   dispatch(messageSlice.actions.getAllMessagesRequest());
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/message/getall",
-      { withCredentials: true }
+      `${import.meta.env.VITE_API_URL}/api/v1/message/getall`,
+      { withCredentials: true },
     );
     dispatch(
-      messageSlice.actions.getAllMessagesSuccess(response.data.messages)
+      messageSlice.actions.getAllMessagesSuccess(response.data.messages),
     );
     dispatch(messageSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      messageSlice.actions.getAllMessagesFailed(error.response.data.message)
+      messageSlice.actions.getAllMessagesFailed(error.response.data.message),
     );
   }
 };
@@ -75,16 +75,16 @@ export const deleteMessage = (id) => async (dispatch) => {
   dispatch(messageSlice.actions.deleteMessageRequest());
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-mev4.onrender.com/api/v1/message/delete/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/v1/message/delete/${id}`,
       {
         withCredentials: true,
-      }
+      },
     );
     dispatch(messageSlice.actions.deleteMessageSuccess(response.data.message));
     dispatch(messageSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      messageSlice.actions.deleteMessageFailed(error.response.data.message)
+      messageSlice.actions.deleteMessageFailed(error.response.data.message),
     );
   }
 };
